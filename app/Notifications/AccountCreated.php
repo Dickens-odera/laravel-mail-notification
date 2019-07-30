@@ -16,9 +16,10 @@ class AccountCreated extends Notification
      *
      * @return void
      */
-    public function __construct()
+    private $message;
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -29,7 +30,7 @@ class AccountCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -41,11 +42,15 @@ class AccountCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting($this->message['header'])
+                    ->line($this->message['body'])
+                    ->action($this->message['actionText'], $this->message['actionUrl'])
+                    ->line($this->message['feedback']);
     }
-
+    public function toDatabase()
+    {
+        //
+    }
     /**
      * Get the array representation of the notification.
      *
