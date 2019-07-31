@@ -34,9 +34,10 @@ class HomeController extends Controller
        $message = array(
             'header'=>'Hello',
             'body'=>'You have just joined our community',
-            'actionText' =>'<a href="{{ route("home") }}">click here to view your dashboad</a> class="btn btn-primary btn-sm"',
+            'actionText' =>'<a href=""><click here to view your dashboad</a> class="btn btn-primary btn-sm"',
             'actionUrl'=>url('/'),
-            'feedback'=>'Thank you for jonining us,we hope to see you again'
+            'feedback'=>'Thank you for jonining us,we hope to see you again',
+            'text'=>'Thi is some kind of a test'
        );
        Notification::send($user, new AccountCreated($message));
        dd('Notification sent successfully');

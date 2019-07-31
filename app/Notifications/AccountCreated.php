@@ -49,7 +49,9 @@ class AccountCreated extends Notification
     }
     public function toDatabase()
     {
-        //
+        return [
+            'text' => $this->message['text']
+        ];
     }
     /**
      * Get the array representation of the notification.
